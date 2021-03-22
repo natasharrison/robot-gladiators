@@ -5,12 +5,12 @@ var playerAttack = 10;
 // you can also log multiple values at once like this 
 console.log(playerName, playerAttack, playerHealth);
 
-varenemyName = "Roborto";
+var enemyName = "Roborto";
 var enemyHealth = 50;
 var enemyAttack = 12;
 
 // create function
-var fight = function(){
+var fight = function() {
     // Alert players that they are starting the round
     window.alert ("Welcome to Robot Gladiators!");
 // subtract the value of 'playerAttack' from the value of 'enemyHealth' and use that result to update the value in the 'enemyHealth' variable
