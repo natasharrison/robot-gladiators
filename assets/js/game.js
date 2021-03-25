@@ -25,14 +25,16 @@ var fight = function(enemyName) {
     if (confirmSkip) {
     window.alert(playerName + " has chosen to skip the fight! Goodbye!");
     // subtract money from playerMoney for skipping
-    playerMoney = playerMoney - 10;
+    playerMoney = Math.max(0, playerMoney - 10);
     console.log("playerMoney", playerMoney);
     break;
     }
 }
 
-    // subtract the value of 'playerAttack' from the value of 'enemyHealth' and use that result to update the value in the 'enemyHealth' variable
-    enemyHealth = enemyHealth - playerAttack;
+    // generate random damage value based on player's attack power
+    var damage = randomNumber(playerAttack - 3, playerAttack);
+
+    enemyHealth = Math.max(0, enemyHealth - damage);
     // log a resulting message to the console so we know that it worked
     console.log(
         playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
@@ -52,7 +54,7 @@ var fight = function(enemyName) {
     }
 
     // subtract the value of 'enemyAttack' from the value of 'playerHealth' and use that result to update the value in the 'playerHealth' variable
-    playerHealth = playerHealth - enemyAttack;
+    playerHealth = Math.max(0, playerHealth - enemyAttack);
     console.log(
     enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
     );
@@ -85,7 +87,7 @@ for(var i=0; i < enemyNames.length; i++) {
         var pickedEnemyName = enemyNames[i];
     
         // reset enemyHealth before starting new fight
-        enemyHealth = 50;
+        enemyHealth = randomNumber(40, 60);
 
         // use debugger to pause script from running and check what's going on at that moment
         // debugger;
@@ -138,8 +140,8 @@ var endGame = function() {
     }
 };
 
-    // go to shop between battles function 
-    var shop = function() {
+// go to shop between battles function 
+var shop = function() {
         // ask player what they'd like to do
         var shopOptionPrompt = window.prompt(
             "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', OR 'LEAVE' to make a choice."
@@ -185,6 +187,13 @@ var endGame = function() {
             shop();
             break;
         }
+};
+
+// function to generate a random numeric value 
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max-min +1) + min);
+
+    return value;
 };
 
     // play again
